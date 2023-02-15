@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/models.dart';
+import '../models/popular.dart';
 
 class MovieSlider extends StatelessWidget {
   // const MovieSlider({Key? key}) : super(key: key);
+  final List<Popular> populars;
+
+  const MovieSlider({Key? key, required this.populars}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    if (this.populars.length == 0) {
+      return Container(
+        width: double.infinity,
+        height: size.height * 0.5,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Container(
       width: double.infinity,
       height: 260,
@@ -23,8 +40,9 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 20,
-                itemBuilder: (_, int index) => _MoviePoster()),
+                itemCount: populars.length,
+                itemBuilder: (_, int index) =>
+                    _MoviePoster(popular: populars[index])),
           )
         ],
       ),
@@ -32,8 +50,14 @@ class MovieSlider extends StatelessWidget {
   }
 }
 
+//            final movie = movies[index];
+//            print(movie.posterPath);
+//  popular = populars[index];
+//  print(popular.posterPath);
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({Key? key}) : super(key: key);
+//  final List<Popular> populars;
+  final popular;
+  const _MoviePoster({Key? key, this.popular}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +69,13 @@ class _MoviePoster extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'details',
-                arguments: 'detalls peli'),
+            onTap: () =>
+                Navigator.pushNamed(context, 'details', arguments: popular),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage('https://via.placeholder.com/300x400'),
+                image: NetworkImage(popular.fullPosterPath),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -62,7 +86,7 @@ class _MoviePoster extends StatelessWidget {
             height: 5,
           ),
           Text(
-            'Star Wars: El retorno del Jedi',
+            popular.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
