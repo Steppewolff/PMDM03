@@ -8,40 +8,16 @@ import '../providers/movies_provider.dart';
 class CastingCards extends StatelessWidget {
 //Aquí se muestran las casting cards, hay que traer la información de la clase
   final int peliID;
-//  final List<Cast> casting;
 
-//  const CastingCards(this.peliID);
   const CastingCards({Key? key, required this.peliID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
-//    final moviesProvider = Provider.of<MoviesProvider>(context);
     final size = MediaQuery.of(context).size;
 
-//     FutureBuilder(
-//       future: moviesProvider.getMovieCast(peliID),
-// //La variable snapshot de la siguiente linea serán los datos que nos devuelva el movieCast, por lo que hay que indicar qé tipo de dato van a ser
-//       builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
-//         if (!snapshot.hasData) {
-//           return Container(
-//             child: Center(
-//               child: CircularProgressIndicator(),
-//             ),
-//           );
-//         }
-// //La variable casting es una lista de objetos Cast
-//         final casting = snapshot.data!;
-
-    // if (this.casting.length == 0) {
-    //   return Container(
-    //     width: double.infinity,
-    //     height: size.height * 0.5,
-    //     child: Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   );
-    // }
+    print('prueba Casting_cards 1');
+    print(peliID);
 
     FutureBuilder(
       future: moviesProvider.getMovieCast(peliID),
@@ -92,7 +68,6 @@ class _CastCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-////////////////////////////////////////////////////////////////////////////////
 //Aqui se carga el atributo de cast, foto del actor
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'),
@@ -105,11 +80,9 @@ class _CastCard extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-////////////////////////////////////////////////////////////////////////////////
 //Aqui se carga el atributo de cast, nombre del actor
           Text(
-//            cast.name,
-            'nombre prueba',
+            cast.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

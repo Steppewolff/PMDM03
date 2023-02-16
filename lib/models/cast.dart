@@ -1,20 +1,5 @@
-//Falta crear la clase y rellenarla con el código de quicktype
-//A ese código, que va dentro del método Cast, hay que añadirle el método getter de más abajo
 //Ese método se debe usar en casting_cards.dart o details_screen.dart para recuperar la info desde ahi
 import 'models.dart';
-
-// class Cast {
-//   Cast({
-//     required this.profilePath,
-//   });
-
-//   get fullProfilePath {
-//     if (this.profilePath != null) {
-//       return 'https://image.tmdb.org/t/p/w500${profilePath}';
-//     }
-//     return 'https://i.stack.imgur.com/GNhxO.png';
-//   }
-// }
 
 class Cast {
   Cast({
