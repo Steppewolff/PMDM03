@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 import '../models/models.dart';
+import '../providers/movies_provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Canviar després per una instància de Peli
     final Movie peli = ModalRoute.of(context)?.settings.arguments as Movie;
+    final moviesProvider = Provider.of<MoviesProvider>(context);
 
     return Scaffold(
       body: CustomScrollView(
@@ -19,7 +22,7 @@ class DetailsScreen extends StatelessWidget {
                 _PosterAndTitile(movie: peli),
                 _Overview(movie: peli),
 //Aquí se lee la info de las peliculas para empezar a mostrar
-                CastingCards(peli.id),
+                CastingCards(peliID: peli.id),
               ],
             ),
           ),
@@ -51,7 +54,7 @@ class _CustomAppBar extends StatelessWidget {
           color: Colors.black12,
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            'Títol peli',
+            movie.title,
             style: TextStyle(fontSize: 16),
           ),
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/models.dart';
 import 'package:provider/provider.dart';
@@ -6,49 +8,72 @@ import '../providers/movies_provider.dart';
 class CastingCards extends StatelessWidget {
 //Aquí se muestran las casting cards, hay que traer la información de la clase
   final int peliID;
+//  final List<Cast> casting;
 
-  const CastingCards(this.peliID);
+//  const CastingCards(this.peliID);
+  const CastingCards({Key? key, required this.peliID}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    try {
-      final moviesProvider =
-          Provider.of<MoviesProvider>(context, listen: false);
+    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+//    final moviesProvider = Provider.of<MoviesProvider>(context);
+    final size = MediaQuery.of(context).size;
 
-      FutureBuilder(
-        future: moviesProvider.getMovieCast(peliID),
+//     FutureBuilder(
+//       future: moviesProvider.getMovieCast(peliID),
+// //La variable snapshot de la siguiente linea serán los datos que nos devuelva el movieCast, por lo que hay que indicar qé tipo de dato van a ser
+//       builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
+//         if (!snapshot.hasData) {
+//           return Container(
+//             child: Center(
+//               child: CircularProgressIndicator(),
+//             ),
+//           );
+//         }
+// //La variable casting es una lista de objetos Cast
+//         final casting = snapshot.data!;
+
+    // if (this.casting.length == 0) {
+    //   return Container(
+    //     width: double.infinity,
+    //     height: size.height * 0.5,
+    //     child: Center(
+    //       child: CircularProgressIndicator(),
+    //     ),
+    //   );
+    // }
+
+    FutureBuilder(
+      future: moviesProvider.getMovieCast(peliID),
+
 //La variable snapshot de la siguiente linea serán los datos que nos devuelva el movieCast, por lo que hay que indicar qé tipo de dato van a ser
-//Cast da error porque todavía no he creado la clase, tampoco he creado returnCastings o como se haya llamado
-//De este snapshot ya se podrá extraer toda la informacón que necesitamos
-        builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
-          if (!snapshot.hasData) {
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-//La variable casting es una lista de objtos Cast
-          final casting = snapshot.data!;
-
+      builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
+        if (!snapshot.hasData) {
           return Container(
-            margin: const EdgeInsets.only(bottom: 30),
-            width: double.infinity,
-            height: 180,
-            // color: Colors.red,
-            child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-//Aqui se carga el dato de
-                itemBuilder: (BuildContext context, int index) =>
-                    _CastCard(cast: casting[index])),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
           );
-        },
-      );
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
+        }
+// La variable casting es una lista de objetos Cast
+        final casting = snapshot.data!;
+        print('prueba Casting_cards 2');
+        print(casting);
+        print('prueba Casting_cards 3');
+        print(snapshot);
+        return Container(
+          margin: const EdgeInsets.only(bottom: 30),
+          width: double.infinity,
+          height: 180,
+          child: ListView.builder(
+              itemCount: 10,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) =>
+                  _CastCard(cast: casting[index])),
+        );
+      },
+    );
+
     return Container();
   }
 }
@@ -63,7 +88,6 @@ class _CastCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 110,
       height: 100,
-      // color: Colors.green,
       child: Column(
         children: [
           ClipRRect(
@@ -84,7 +108,8 @@ class _CastCard extends StatelessWidget {
 ////////////////////////////////////////////////////////////////////////////////
 //Aqui se carga el atributo de cast, nombre del actor
           Text(
-            cast.name,
+//            cast.name,
+            'nombre prueba',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

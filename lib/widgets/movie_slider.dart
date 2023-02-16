@@ -57,6 +57,7 @@ class MovieSlider extends StatelessWidget {
 class _MoviePoster extends StatelessWidget {
 //  final List<Popular> populars;
   final popular;
+
   const _MoviePoster({Key? key, this.popular}) : super(key: key);
 
   @override

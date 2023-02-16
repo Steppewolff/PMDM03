@@ -12,7 +12,7 @@ class CreditResponse {
     required this.crew,
   });
 
-  int id;
+  int? id;
   List<Cast> cast;
   List<Cast> crew;
 
