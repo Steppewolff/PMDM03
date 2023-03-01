@@ -19,7 +19,7 @@ class CastingCards extends StatelessWidget {
     print('prueba Casting_cards 1');
     print(peliID);
 
-    FutureBuilder(
+    return FutureBuilder(
       future: moviesProvider.getMovieCast(peliID),
 
 //La variable snapshot de la siguiente linea serán los datos que nos devuelva el movieCast, por lo que hay que indicar qé tipo de dato van a ser
@@ -50,7 +50,7 @@ class CastingCards extends StatelessWidget {
       },
     );
 
-    return Container();
+//    return Container();
   }
 }
 

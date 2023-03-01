@@ -14,12 +14,12 @@ class MoviesProvider extends ChangeNotifier {
   String _page = '1';
 
   List<Movie> onDisplayMovies = [];
-  final int peliID = 0;
+//  final int peliID = 0;
 
   MoviesProvider() {
     this.getOnDisplayMovies();
     this.getOnPopulars();
-    this.getMovieCast(peliID);
+//    this.getMovieCast(peliID);
   }
 
   getOnDisplayMovies() async {

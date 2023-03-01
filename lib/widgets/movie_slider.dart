@@ -11,7 +11,7 @@ class MovieSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    print('object');
     if (this.populars.length == 0) {
       return Container(
         width: double.infinity,
